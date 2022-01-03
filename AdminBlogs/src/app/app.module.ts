@@ -3,14 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginModule } from './login/login.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
 import {FormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http'; 
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {AdminSectionModule} from "./adminSection/adminSection.module";
+import { RouterModule } from '@angular/router';
+import { MaterialModule } from './utils/common.modules/Material.Modules';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +16,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LoginModule,MatInputModule,MatFormFieldModule,MatIconModule,FormsModule,HttpClientModule,ToastrModule.forRoot({
-      positionClass :'toast-bottom-right'
-    }),BrowserAnimationsModule
+    LoginModule,FormsModule,HttpClientModule,
+    ToastrModule.forRoot({positionClass :'toast-bottom-right'}),
+    AdminSectionModule,RouterModule,MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,13 +16,13 @@
                      <input type="text" class="form-control" placeholder="Email" formControlName="EmailId"/><br/>
                     
                      <label>Password</label>
-                     <br/><span class="Fielderror" *ngIf="SignIn.controls['UserPassword'].hasError('minlength') || SignIn.controls['UserPassword'].hasError('maxlength')">Incorrect password</span><br/>
+                     <span class="Fielderror" *ngIf="SignIn.controls['UserPassword'].hasError('minlength') || SignIn.controls['UserPassword'].hasError('maxlength')"><br/>Incorrect password</span><br/>
                      <input type="password" class="form-control" placeholder="Password" formControlName="UserPassword"/>
                   </div><br/>
                   <button class="btn btn-black" [disabled]='!SignIn.valid'>Login</button> &nbsp;&nbsp;
-              
+                  <a href='/forgetPassword'>Forget Password</a> &nbsp;&nbsp;
+           
                </form>
             </div>
          </div>
       </div>
-      
