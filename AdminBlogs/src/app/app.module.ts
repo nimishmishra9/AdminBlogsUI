@@ -9,6 +9,8 @@ import { ToastrModule } from 'ngx-toastr';
 import {AdminSectionModule} from "./adminSection/adminSection.module";
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './utils/common.modules/Material.Modules';
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from './utils/reducers';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +20,7 @@ import { MaterialModule } from './utils/common.modules/Material.Modules';
     AppRoutingModule,
     LoginModule,FormsModule,HttpClientModule,
     ToastrModule.forRoot({positionClass :'toast-bottom-right'}),
-    AdminSectionModule,RouterModule,MaterialModule
+    AdminSectionModule,RouterModule,MaterialModule,StoreModule.forRoot(rootReducer),
   ],
   providers: [],
   bootstrap: [AppComponent]

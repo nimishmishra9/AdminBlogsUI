@@ -5,6 +5,9 @@ import { AuthService } from '../Auth.service';
 import { LoginModel } from 'src/app/Models/LoginModel';
 import { ToastrService } from 'ngx-toastr';
 import { NavigationExtras, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { getUsers, RootReducerState } from 'src/app/utils/reducers';
+import { UserListRequestAction, UserListSuccessAction } from 'src/app/utils/actions/user-action';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +21,9 @@ export class LoginComponent implements OnInit {
   SignIn:FormGroup;
   loginDetails:LoginModel;
   
-  constructor(private _router: Router,private formBuilder:FormBuilder, private authservice: AuthService,private toastr: ToastrService )
+  constructor(private _router: Router,private formBuilder:FormBuilder, 
+    private authservice: AuthService,private toastr: ToastrService,
+    private store:Store<RootReducerState> )
   {
     this.SignIn=formBuilder.group({
     EmailId:[null, [Validators.required, Validators.email]],
@@ -34,12 +39,14 @@ export class LoginComponent implements OnInit {
    EmailId:this.SignIn.get('EmailId')?.value.toString(),
    Passsword:this.SignIn.get('UserPassword')?.value.toString()
    }
+    this.store.dispatch(new UserListRequestAction())
     this.authservice.login(this.loginDetails).subscribe(res=>{ 
+      debugger;
     if(res.value.statusCode===200)
     {
     localStorage.setItem("Key",res.value.value.token)
+    this.store.dispatch(new UserListSuccessAction({users:res.serializerSettings}))
     this.toastr.success('Login successfully', 'Welcome!');
-    console.log(res.serializerSettings)
     this._router.navigate(['admin/admindashboard',res])
     }
     else if(res.value.statusCode===401)
@@ -51,6 +58,8 @@ export class LoginComponent implements OnInit {
       this.toastr.error('Login falied', '');
     }
     });
+
+    
   }
   
   ngOnInit(): void {

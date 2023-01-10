@@ -8,10 +8,11 @@ export class DashboardService {
   constructor() { }
 
   bigChart() {
-    return [{
+    return [
+      {
       name: 'Asia',
       data: [502, 635, 809, 947, 1402, 3634, 5268]
-    }, {
+      }, {
       name: 'Africa',
       data: [106, 107, 111, 133, 221, 767, 1766]
     }, {
